@@ -170,3 +170,4 @@ D:\codes-and-projects\Asp_project\Student\StudentInfo\obj\Debug\net8.0\refint\St
 D:\codes-and-projects\Asp_project\Student\StudentInfo\obj\Debug\net8.0\StudentInfo.pdb
 D:\codes-and-projects\Asp_project\Student\StudentInfo\obj\Debug\net8.0\StudentInfo.genruntimeconfig.cache
 D:\codes-and-projects\Asp_project\Student\StudentInfo\obj\Debug\net8.0\ref\StudentInfo.dll
+D:\codes-and-projects\Asp_project\Student\StudentInfo\obj\Debug\net8.0\StudentInfo.sourcelink.json

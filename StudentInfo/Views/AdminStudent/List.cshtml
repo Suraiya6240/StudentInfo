@@ -17,6 +17,7 @@
 						<th>Name</th>
 						<th>Department</th>
 						<th>Session</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,6 +31,7 @@
 						<td>@student.Name</td>
 						<td>@student.Department</td>
 						<td>@student.Session</td>
+						<td><a asp-controller="AdminStudent" asp-action="Edit"asp-route-id="@student.Id" >Edit </a></td>
 					</tr>
 				}
 			</table>
@@ -39,4 +41,5 @@
 			<p>No Student Found</p>
 		}
 
+	</div>
 	</div>

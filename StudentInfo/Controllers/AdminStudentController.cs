@@ -20,7 +20,7 @@ namespace StudentInfo.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(AddStudentRequest addStudentRequest)
+        public object Add(AddStudentRequest addStudentRequest)
         {
             var student = new Student
             {
@@ -30,15 +30,69 @@ namespace StudentInfo.Controllers
                 Session = addStudentRequest.session,
             };
 
-            _studentDbContext.StudentInfo.Add(student);
+
+            _studentDbContext.studentInfo.Add(student);
             _studentDbContext.SaveChanges();
-            return View();
+            return RedirectToAction("List");
         }
         [HttpGet]
         public IActionResult List()
         {
-            var students = _studentDbContext.StudentInfo.ToList();
+            var students = _studentDbContext.studentInfo.ToList();
             return View(students);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var student = _studentDbContext.studentInfo.FirstOrDefault(x => x.Id == id);
+            if (student != null)
+            {
+                var editStudentRequest = new EditStudentRequest
+                {
+                    Id = student.Id,
+                    Name = student.Name,
+                    Department = student.Department,
+                    Session = student.Session,
+                };
+
+                return View(editStudentRequest);
+            }
+            return View(null);
+        }
+        [HttpPost]
+        public IActionResult Edit
+            (EditStudentRequest editStudentRequest)
+        {
+            var student = new Student
+            {
+                Id = editStudentRequest.Id,
+                Name = editStudentRequest.Name,
+                Department = editStudentRequest.Department,
+                Session = editStudentRequest.Session
+            };
+            var existingStudent = _studentDbContext.studentInfo.Find(student.Id);
+            if (existingStudent != null)
+            {
+                existingStudent.Name = student.Name;
+                existingStudent.Department = student.Department;
+                existingStudent.Session = student.Session;
+                _studentDbContext.SaveChanges();
+            }
+            return RedirectToAction("List");
+        }
+        [HttpPost]
+        public IActionResult Delete(EditStudentRequest editStudentRequest)
+        {
+            var student = _studentDbContext.studentInfo.Find(editStudentRequest.Id);
+            {
+                if(student != null)
+                {
+                    _studentDbContext.studentInfo.Remove(student);
+                    _studentDbContext.SaveChanges();
+                }
+                return RedirectToAction("List");
+            } 
         }
     }
 }
+    
